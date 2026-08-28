@@ -1,0 +1,29 @@
+{
+  "name": "ai-se_project_mesh-ai",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kablesgaming-hue/ai-se_project_mesh-ai.git"
+  },
+  "keywords": [],
+  "description": "Backend API scaffold for the MeshAI platform",
+  "author": "Kenneth Robinette",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/kablesgaming-hue/ai-se_project_mesh-ai/issues"
+  },
+  "homepage": "https://github.com/kablesgaming-hue/ai-se_project_mesh-ai#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.4.0",
+    "typescript": "^7.0.2"
+  }
+}
