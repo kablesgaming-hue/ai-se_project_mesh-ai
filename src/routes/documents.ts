@@ -1,4 +1,5 @@
 import { Router } from "express";
+import { auth } from "../middleware/auth.js";
 import {
   uploadDocument,
   getDocuments,
@@ -7,6 +8,8 @@ import {
 } from "../controllers/documents.js";
 
 const documentsRouter = Router();
+
+documentsRouter.use(auth);
 
 documentsRouter.post("/", uploadDocument);
 documentsRouter.get("/", getDocuments);
