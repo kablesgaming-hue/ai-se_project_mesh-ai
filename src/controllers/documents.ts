@@ -23,9 +23,11 @@ export const uploadDocument = async (
     return;
   }
 
+  const title = req.body.title || req.file.originalname;
+
   const document = await Document.create({
-    title: req.file.originalname,
-    fileName: req.file.filename,
+    title,
+    fileName: req.file.originalname,
     userId,
   });
 
