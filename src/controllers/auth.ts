@@ -38,7 +38,7 @@ export const registerUser = async (
       success: false,
       data: null,
       error: {
-        message: "User already exists",
+        message: "Email already exists",
       },
     });
     return;

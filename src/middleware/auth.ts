@@ -9,7 +9,7 @@ export const auth = (req: Request, res: Response, next: NextFunction): void => {
       success: false,
       data: null,
       error: {
-        message: "Authorization required",
+        message: "Authorization token required",
       },
     });
     return;
