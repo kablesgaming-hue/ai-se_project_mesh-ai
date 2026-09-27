@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import UploadArea from "../../components/UploadArea/UploadArea";
+import deleteIcon from "../../assets/delete-icon.png";
 import { getDocuments } from "../../utils/api";
 import type { KnowledgeDoc } from "../../utils/api";
 import "./KnowledgeBase.css";
@@ -13,7 +14,7 @@ export default function KnowledgeBase() {
     const load = async () => {
       try {
         const res = await getDocuments();
-        setDocuments(res.data ?? []);
+        setDocuments(res.data || []);
       } catch {
         setError("Failed to load documents.");
       } finally {
@@ -38,38 +39,50 @@ export default function KnowledgeBase() {
 
   return (
     <div className="knowledge-base">
-      <h1>Manage Your Knowledge Base</h1>
+      <h1 className="knowledge-base__title">Manage Your Knowledge Base</h1>
 
       <section className="knowledge-base__content">
-        <p>Upload documents (PDF)</p>
+        <div className="knowledge-base__document-upload">
+          <div className="knowledge-base__upload-instructions">
+            <p className="knowledge-base__upload-label">
+              Upload documents (PDF)
+            </p>
 
-        <UploadArea onFileSelect={handleFileSelect} />
-
-        {isLoading && <p>Loading documents...</p>}
-
-        {!isLoading && error && <p>{error}</p>}
-
-        {!isLoading && !error && documents.length === 0 && (
-          <p>No documents yet.</p>
-        )}
-
-        {!isLoading && !error && documents.length > 0 && (
-          <div className="knowledge-base__documents">
-            {documents.map((doc) => (
-              <div className="knowledge-base__document" key={doc._id}>
-                <span>{doc.fileName}</span>
-
-                <button
-                  className="knowledge-base__delete-button"
-                  type="button"
-                  aria-label={`Delete ${doc.fileName}`}
-                >
-                  X
-                </button>
-              </div>
-            ))}
+            <UploadArea onFileSelect={handleFileSelect} />
           </div>
-        )}
+
+          {isLoading && (
+            <p className="knowledge-base__status">Loading documents...</p>
+          )}
+
+          {!isLoading && error && (
+            <p className="knowledge-base__status knowledge-base__status_error">
+              {error}
+            </p>
+          )}
+
+          {!isLoading && !error && documents.length === 0 && (
+            <p className="knowledge-base__status">No documents yet.</p>
+          )}
+
+          {!isLoading && !error && documents.length > 0 && (
+            <div className="knowledge-base__documents">
+              {documents.map((doc) => (
+                <div className="knowledge-base__document" key={doc._id}>
+                  <span>{doc.title}</span>
+
+                  <button
+                    className="knowledge-base__delete-button"
+                    type="button"
+                    aria-label={`Delete ${doc.title}`}
+                  >
+                    <img src={deleteIcon} alt="" />
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
 
         <button className="knowledge-base__save-button" type="button">
           Save
