@@ -45,6 +45,14 @@ export default function KnowledgeBase() {
 
         <UploadArea onFileSelect={handleFileSelect} />
 
+        {isLoading && <p>Loading documents...</p>}
+
+        {!isLoading && error && <p>{error}</p>}
+
+        {!isLoading && !error && documents.length === 0 && (
+          <p>No documents yet.</p>
+        )}
+
         {!isLoading && !error && documents.length > 0 && (
           <div className="knowledge-base__documents">
             {documents.map((doc) => (
