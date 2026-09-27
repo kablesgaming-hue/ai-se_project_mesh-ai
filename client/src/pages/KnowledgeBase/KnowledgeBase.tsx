@@ -1,12 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import UploadArea from "../../components/UploadArea/UploadArea";
+import { getDocuments } from "../../utils/api";
 import type { KnowledgeDoc } from "../../utils/api";
 import "./KnowledgeBase.css";
 
 export default function KnowledgeBase() {
-  const [, setDocuments] = useState<KnowledgeDoc[]>([]);
-  // const [isLoading] = useState<boolean>(true);
-  // const [error] = useState<string | null>(null);
+  const [documents, setDocuments] = useState<KnowledgeDoc[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const res = await getDocuments();
+        setDocuments(res.data ?? []);
+      } catch {
+        setError("Failed to load documents.");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    load();
+  }, []);
 
   const handleFileSelect = (file: File) => {
     const newDoc: KnowledgeDoc = {
@@ -29,7 +45,23 @@ export default function KnowledgeBase() {
 
         <UploadArea onFileSelect={handleFileSelect} />
 
-        <div className="knowledge-base__documents"></div>
+        {!isLoading && !error && documents.length > 0 && (
+          <div className="knowledge-base__documents">
+            {documents.map((doc) => (
+              <div className="knowledge-base__document" key={doc._id}>
+                <span>{doc.fileName}</span>
+
+                <button
+                  className="knowledge-base__delete-button"
+                  type="button"
+                  aria-label={`Delete ${doc.fileName}`}
+                >
+                  X
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
 
         <button className="knowledge-base__save-button" type="button">
           Save
