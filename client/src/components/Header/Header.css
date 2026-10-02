@@ -8,9 +8,18 @@
 }
 
 .header__logo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   font-size: 18px;
   font-weight: 600;
   color: #1c1c1c;
+}
+
+.header__logo img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
 }
 
 .header__nav {

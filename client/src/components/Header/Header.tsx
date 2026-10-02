@@ -8,7 +8,10 @@ export default function Header() {
 
   return (
     <header className="header">
-      <div className="header__logo">Mesh AI</div>
+      <div className="header__logo">
+  <span>Mesh AI</span>
+  <img src="/favicon.png" alt="" />
+</div>
 
       <nav className="header__nav">
         <NavLink to="/knowledge" className={getNavLinkClass}>
