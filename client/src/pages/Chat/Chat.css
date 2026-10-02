@@ -32,6 +32,19 @@
   cursor: pointer;
 }
 
+.chat__title-input {
+  box-sizing: border-box;
+  width: 220px;
+  height: 36px;
+  margin-top: 8px;
+  padding: 8px 12px;
+  border: 1px solid #1c1c1c;
+  border-radius: 4px;
+  font-family: "Work Sans", Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  outline: none;
+}
+
 .chat__sidebar-message {
   margin: 12px 0;
   font-size: 14px;
@@ -82,4 +95,125 @@
 
 .chat__main {
   flex: 1;
+  min-width: 0;
+  margin-left: 260px;
+  padding-right: 40px;
+}
+
+.chat__no-messages {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 500px;
+  text-align: center;
+}
+
+.chat__no-messages h2 {
+  max-width: 450px;
+  margin: 0 0 20px;
+  font-size: 20px;
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+.chat__start-btn {
+  padding: 8px 14px;
+  border: 0;
+  border-radius: 4px;
+  background: #1c1c1c;
+  color: #ffffff;
+  font-family: "Work Sans", Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.chat__error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 500px;
+  text-align: center;
+}
+
+.chat__error h2 {
+  margin: 0 0 8px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.chat__error p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.chat__messages {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 40px 0;
+  padding: 0;
+  list-style: none;
+  overflow-y: auto;
+}
+
+.chat__message {
+  max-width: 70%;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.chat__message_user {
+  align-self: flex-end;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: #f1f1f1;
+}
+
+.chat__message_assistant {
+  align-self: flex-start;
+}
+
+.chat__message_assistant p {
+  margin-bottom: 12px;
+}
+
+.chat__message_assistant p:last-child {
+  margin-bottom: 0;
+}
+
+.chat__message_assistant strong {
+  font-weight: 600;
+}
+
+.chat__message_assistant ul,
+.chat__message_assistant ol {
+  padding-left: 20px;
+  margin-bottom: 12px;
+}
+
+.chat__message_assistant li {
+  margin-bottom: 4px;
+}
+
+.chat__message_assistant h1,
+.chat__message_assistant h2,
+.chat__message_assistant h3 {
+  margin: 16px 0 8px;
+  font-weight: 600;
+}
+
+.chat__message_assistant hr {
+  margin: 16px 0;
+  border: none;
+  border-bottom: 1px solid rgb(28 28 28 / 0.1);
+}
+
+.chat__message_assistant code {
+  padding: 2px 5px;
+  border-radius: 4px;
+  background: rgb(0 0 0 / 0.06);
+  font-family: ui-monospace, "Cascadia Code", "SF Mono", monospace;
+  font-size: 0.9em;
 }
