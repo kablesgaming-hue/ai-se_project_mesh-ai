@@ -304,3 +304,48 @@
   font-family: ui-monospace, "Cascadia Code", "SF Mono", monospace;
   font-size: 0.9em;
 }
+
+.chat__input-bar {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  width: 670px;
+  min-height: 56px;
+  margin: 24px auto 32px;
+  padding: 8px 12px 8px 16px;
+  border: 1px solid rgba(150, 121, 217, 0.2);
+  border-radius: 4px;
+  background: #ffffff;
+}
+
+.chat__input {
+  box-sizing: border-box;
+  flex: 1;
+  min-width: 0;
+  min-height: 40px;
+  padding: 10px 8px;
+  border: 0;
+  outline: none;
+  resize: none;
+  overflow: hidden;
+  background: transparent;
+  font-family: "Work Sans", Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  color: #1c1c1c;
+}
+
+.chat__input::placeholder {
+  color: rgba(28, 28, 28, 0.45);
+}
+
+.chat__send {
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+  margin-left: 8px;
+  padding: 0;
+  border: 0;
+  background: transparent url("/chat-send.svg") center / 24px 24px no-repeat;
+  cursor: pointer;
+}
