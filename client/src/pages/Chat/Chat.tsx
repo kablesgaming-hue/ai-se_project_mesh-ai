@@ -110,6 +110,15 @@ export default function Chat() {
     }
   };
 
+  const handleKeyDown = (
+    e: React.KeyboardEvent<HTMLTextAreaElement>,
+  ) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSend();
+    }
+  };
+
   return (
     <div className="chat">
       <aside className="chat__sidebar">
@@ -248,6 +257,8 @@ export default function Chat() {
                 rows={1}
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
+                onKeyDown={handleKeyDown}
+                disabled={isSending}
               />
 
               <button
