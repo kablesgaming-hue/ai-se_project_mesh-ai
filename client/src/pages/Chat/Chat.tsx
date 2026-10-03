@@ -230,12 +230,12 @@ export default function Chat() {
         {activeChatId && messagesError && (
           <div className="chat__error">
             <div className="chat__error-icon" aria-hidden="true">
-              <span className="chat__error-polygon chat__error-polygon_2" />
-              <span className="chat__error-polygon chat__error-polygon_4" />
-              <span className="chat__error-polygon chat__error-polygon_3" />
-              <span className="chat__error-polygon chat__error-polygon_1" />
-              <span className="chat__error-mark" />
-            </div>
+  <img
+    className="chat__error-icon-image"
+    src="/chat-error-icon.png"
+    alt=""
+  />
+</div>
 
             <div className="chat__error-message">
               <div className="chat__error-text">

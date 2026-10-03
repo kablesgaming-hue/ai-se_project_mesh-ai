@@ -37,6 +37,12 @@ export default function KnowledgeBase() {
     setDocuments((currentDocuments) => [newDoc, ...currentDocuments]);
   };
 
+  const handleDeleteDocument = (documentId: string) => {
+    setDocuments((currentDocuments) =>
+      currentDocuments.filter((doc) => doc._id !== documentId),
+    );
+  };
+
   return (
     <div className="knowledge-base">
       <h1 className="knowledge-base__title">Manage Your Knowledge Base</h1>
@@ -75,6 +81,7 @@ export default function KnowledgeBase() {
                     className="knowledge-base__delete-button"
                     type="button"
                     aria-label={`Delete ${doc.title}`}
+                    onClick={() => handleDeleteDocument(doc._id)}
                   >
                     <img src={deleteIcon} alt="" />
                   </button>

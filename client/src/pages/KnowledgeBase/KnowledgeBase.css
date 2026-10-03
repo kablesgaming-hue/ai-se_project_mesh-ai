@@ -2,6 +2,7 @@
   width: 670px;
   margin: 34px auto 0;
   color: #1c1c1c;
+  font-family: "Work Sans", Arial, Helvetica, sans-serif;
 }
 
 .knowledge-base__title {
@@ -39,6 +40,7 @@
 
 .knowledge-base__upload-label {
   width: 670px;
+  margin: 0;
   font-family: "Work Sans", Arial, Helvetica, sans-serif;
   font-size: 18px;
   font-weight: 400;
@@ -71,6 +73,7 @@
 }
 
 .knowledge-base__document {
+  box-sizing: border-box;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -94,11 +97,14 @@
   width: 16px;
   height: 16px;
   padding: 0;
+  border: 0;
+  background: transparent;
 }
 
 .knowledge-base__delete-button img {
   width: 16px;
   height: 16px;
+  object-fit: contain;
 }
 
 .knowledge-base__delete-button:hover img {
@@ -120,6 +126,7 @@
   font-size: 18px;
   font-weight: 500;
   line-height: 21px;
+  cursor: pointer;
 }
 
 .knowledge-base__save-button:hover {
@@ -130,6 +137,21 @@
       rgba(150, 121, 217, 0) 100%
     ),
     #1c1c1c;
+}
+
+@media (max-width: 1200px) {
+  .knowledge-base {
+    width: min(670px, calc(100% - 40px));
+  }
+
+  .knowledge-base__title,
+  .knowledge-base__content,
+  .knowledge-base__document-upload,
+  .knowledge-base__upload-instructions,
+  .knowledge-base__upload-label,
+  .knowledge-base__documents {
+    width: 100%;
+  }
 }
 
 @media (max-width: 394px) {
@@ -149,12 +171,12 @@
   .knowledge-base__content,
   .knowledge-base__document-upload,
   .knowledge-base__upload-instructions,
-  .knowledge-base__upload-label {
+  .knowledge-base__upload-label,
+  .knowledge-base__documents {
     width: 100%;
   }
 
   .knowledge-base__documents {
-    width: 100%;
     min-height: 212px;
   }
 

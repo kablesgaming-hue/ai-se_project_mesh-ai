@@ -1,44 +1,83 @@
 import { useNavigate } from "react-router-dom";
 import "./Intro.css";
 
+import dataIcon from "../../assets/iconn.png";
+import organizeIcon from "../../assets/Icon (1).png";
+import knowledgeIcon from "../../assets/Icon (2).png";
+
 export default function Intro() {
   const navigate = useNavigate();
 
   return (
     <section className="intro">
-      <h1>Welcome to Mesh AI</h1>
+      <div className="intro__card">
+        <div className="intro__heading">
+  <h1 className="intro__title">Welcome to Mesh AI</h1>
+  <img
+    className="intro__logo"
+    src="/favicon.png"
+    alt=""
+    aria-hidden="true"
+  />
+</div>
 
-      <div className="intro__cards">
-        <article className="intro__card">
-          <div className="intro__icon">📄</div>
-          <h2>Bring your data</h2>
-          <p>Upload documents and build your knowledge base.</p>
-        </article>
+        <div className="intro__cards">
+          <article className="intro__onboarding-card">
+            <img
+              className="intro__icon"
+              src={dataIcon}
+              alt=""
+              aria-hidden="true"
+            />
 
-        <article className="intro__card">
-          <div className="intro__icon">💬</div>
-          <h2>Organize and manage</h2>
-          <p>Keep your documents organized and ready to use.</p>
-        </article>
+            <div className="intro__card-copy">
+              <h2>Bring all your documents into one secure AI workspace</h2>
+            </div>
+          </article>
 
-        <article className="intro__card">
-          <div className="intro__icon">✨</div>
-          <h2>Make knowledge useful</h2>
-          <p>Ask questions and get answers from your documents.</p>
-        </article>
+          <article className="intro__onboarding-card">
+            <img
+              className="intro__icon"
+              src={organizeIcon}
+              alt=""
+              aria-hidden="true"
+            />
+
+            <div className="intro__card-copy">
+              <h2>Organize and manage the documents that power your AI</h2>
+            </div>
+          </article>
+
+          <article className="intro__onboarding-card">
+            <img
+              className="intro__icon"
+              src={knowledgeIcon}
+              alt=""
+              aria-hidden="true"
+            />
+
+            <div className="intro__card-copy">
+              <h2>
+                Your knowledge base, accessible through a simple chat interface
+              </h2>
+            </div>
+          </article>
+        </div>
+
+        <div className="intro__container">
+          <p className="intro__description">
+            Start by creating your organization&apos;s Knowledge Base
+          </p>
+
+          <button
+            className="intro__button"
+            type="button"
+            onClick={() => navigate("/knowledge")}
+          >
+            Start
+          </button>
+        </div>
       </div>
-
-      <p className="intro__description">
-        Start by creating your organization&apos;s Knowledge Base
-      </p>
-
-      <button
-        className="intro__button"
-        type="button"
-        onClick={() => navigate("/knowledge")}
-      >
-        Start
-      </button>
     </section>
   );
 }
