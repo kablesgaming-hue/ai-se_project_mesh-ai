@@ -128,25 +128,112 @@
   cursor: pointer;
 }
 
+/* Error state */
+
 .chat__error {
+  position: absolute;
+  top: 226px;
+  left: 50%;
+  width: 670px;
+  height: 302px;
+  transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 0;
+}
+
+/* Figma icon container — 182.69 × 154 */
+
+.chat__error-icon {
+  width: 182.69px;
+  height: 154px;
+  flex: 0 0 154px;
+  display: flex;
+  align-items: center;
   justify-content: center;
-  min-height: 500px;
-  text-align: center;
 }
 
-.chat__error h2 {
-  margin: 0 0 8px;
-  font-size: 20px;
-  font-weight: 600;
+.chat__error-icon-image {
+  display: block;
+  width: 182.69px;
+  height: 154px;
+  object-fit: contain;
 }
 
-.chat__error p {
+/* Error message container */
+
+.chat__error-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 670px;
+  height: 148px;
+  padding: 0;
+  gap: 32px;
+}
+
+/* Text block */
+
+.chat__error-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 670px;
+  height: 72px;
+  padding: 0;
+  gap: 12px;
+}
+
+.chat__error-text h2 {
+  width: 670px;
+  height: 37px;
   margin: 0;
-  font-size: 14px;
+  font-family: "Work Sans", Arial, Helvetica, sans-serif;
+  font-size: 32px;
+  line-height: 38px;
+  font-weight: 600;
+  text-align: center;
+  color: #e36161;
 }
+
+.chat__error-text p {
+  width: 475px;
+  height: 23px;
+  margin: 0;
+  font-family: "Work Sans", Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  line-height: 23px;
+  font-weight: 400;
+  text-align: center;
+  color: #1c1c1c;
+}
+
+/* Figma button — 210 × 44 */
+
+.chat__error-btn {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 210px;
+  height: 44px;
+  padding: 10px 16px;
+  border: 0;
+  border-radius: 8px;
+  background: #1c1c1c;
+  font-family: "Work Sans", Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  line-height: 21px;
+  font-weight: 500;
+  color: #ffffff;
+  text-align: center;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+/* Messages */
 
 .chat__messages {
   display: flex;

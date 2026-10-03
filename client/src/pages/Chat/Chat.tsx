@@ -40,7 +40,8 @@ export default function Chat() {
       setIsLoadingMessages(true);
 
       try {
-        const res = await getChat(activeChatId);
+
+  const res = await getChat(activeChatId);
         setMessages(res.data?.messages || []);
       } catch {
         setMessagesError("Failed to load messages.");
@@ -159,8 +160,24 @@ export default function Chat() {
 
         {activeChatId && messagesError && (
           <div className="chat__error">
-            <h2>Looks like something went wrong</h2>
-            <p>{messagesError}</p>
+            <div className="chat__error-icon" aria-hidden="true">
+              <img
+                className="chat__error-icon-image"
+                src="/chat-error-icon.png"
+                alt=""
+              />
+            </div>
+
+            <div className="chat__error-message">
+              <div className="chat__error-text">
+                <h2>Looks like something went wrong</h2>
+                <p>Try reloading the page or creating the chat again</p>
+              </div>
+
+              <button className="chat__error-btn" type="button">
+                Go to the Main Page
+              </button>
+            </div>
           </div>
         )}
 
