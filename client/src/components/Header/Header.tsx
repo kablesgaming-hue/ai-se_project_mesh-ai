@@ -1,19 +1,45 @@
 import { NavLink } from "react-router-dom";
 import "./Header.css";
 
-export default function Header() {
+type Props = {
+  onMenuOpen: () => void;
+  onMenuClose: () => void;
+  isMobileMenuOpen: boolean;
+};
+
+export default function Header({
+  onMenuOpen,
+  onMenuClose,
+  isMobileMenuOpen,
+}: Props) {
   function getNavLinkClass({ isActive }: { isActive: boolean }) {
     return isActive ? "header__link header__link_active" : "header__link";
   }
 
   return (
-    <header className="header">
-      <div className="header__logo">
-  <span>Mesh AI</span>
-  <img src="/favicon.png" alt="" />
-</div>
+    <header
+      className={isMobileMenuOpen ? "header header_mobile" : "header"}
+    >
+      <button
+        type="button"
+        className="header__menu-btn"
+        aria-label="Open menu"
+        onClick={onMenuOpen}
+      />
 
-      <nav className="header__nav">
+      <div className="header__logo">
+        <span>Mesh AI</span>
+        <img src="/favicon.png" alt="" />
+      </div>
+
+      <nav
+        className={
+          isMobileMenuOpen
+            ? "header__nav header__nav_mobile"
+            : "header__nav"
+        }
+        onClick={onMenuClose}
+      >
         <NavLink to="/knowledge" className={getNavLinkClass}>
           Knowledge Base
         </NavLink>
