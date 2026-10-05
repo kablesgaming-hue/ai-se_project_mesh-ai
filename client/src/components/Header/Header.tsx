@@ -17,9 +17,7 @@ export default function Header({
   }
 
   return (
-    <header
-      className={isMobileMenuOpen ? "header header_mobile" : "header"}
-    >
+    <header className={isMobileMenuOpen ? "header header_mobile" : "header"}>
       <button
         type="button"
         className="header__menu-btn"
@@ -29,14 +27,12 @@ export default function Header({
 
       <div className="header__logo">
         <span>Mesh AI</span>
-        <img src="/favicon.png" alt="" />
+        <img src="/favicon.png" alt="Mesh AI logo" />
       </div>
 
       <nav
         className={
-          isMobileMenuOpen
-            ? "header__nav header__nav_mobile"
-            : "header__nav"
+          isMobileMenuOpen ? "header__nav header__nav_mobile" : "header__nav"
         }
         onClick={onMenuClose}
       >

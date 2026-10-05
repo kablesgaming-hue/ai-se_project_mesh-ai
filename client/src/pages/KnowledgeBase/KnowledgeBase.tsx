@@ -83,7 +83,7 @@ export default function KnowledgeBase() {
                     aria-label={`Delete ${doc.title}`}
                     onClick={() => handleDeleteDocument(doc._id)}
                   >
-                    <img src={deleteIcon} alt="" />
+                    <img src={deleteIcon} alt={`Delete ${doc.title}`} />
                   </button>
                 </div>
               ))}

@@ -298,3 +298,29 @@
     height: 52px;
   }
 }
+
+@media (max-width: 360px) {
+  .intro__onboarding-card {
+    gap: 12px;
+    padding: 12px;
+  }
+
+  .intro__icon {
+    width: 76px;
+    height: 76px;
+  }
+
+  .intro__card-copy {
+    width: auto;
+    height: auto;
+    min-width: 0;
+    flex: 1;
+  }
+
+  .intro__card-copy h2 {
+    width: 100%;
+    height: auto;
+    font-size: 15px;
+    line-height: 120%;
+  }
+}

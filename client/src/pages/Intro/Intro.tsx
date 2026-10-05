@@ -12,23 +12,13 @@ export default function Intro() {
     <section className="intro">
       <div className="intro__card">
         <div className="intro__heading">
-  <h1 className="intro__title">Welcome to Mesh AI</h1>
-  <img
-    className="intro__logo"
-    src="/favicon.png"
-    alt=""
-    aria-hidden="true"
-  />
-</div>
+          <h1 className="intro__title">Welcome to Mesh AI</h1>
+          <img className="intro__logo" src="/favicon.png" alt="Mesh AI logo" />
+        </div>
 
         <div className="intro__cards">
           <article className="intro__onboarding-card">
-            <img
-              className="intro__icon"
-              src={dataIcon}
-              alt=""
-              aria-hidden="true"
-            />
+            <img className="intro__icon" src={dataIcon} alt="Document icon" />
 
             <div className="intro__card-copy">
               <h2>Bring all your documents into one secure AI workspace</h2>
@@ -39,8 +29,7 @@ export default function Intro() {
             <img
               className="intro__icon"
               src={organizeIcon}
-              alt=""
-              aria-hidden="true"
+              alt="Organization icon"
             />
 
             <div className="intro__card-copy">
@@ -52,8 +41,7 @@ export default function Intro() {
             <img
               className="intro__icon"
               src={knowledgeIcon}
-              alt=""
-              aria-hidden="true"
+              alt="Knowledge base icon"
             />
 
             <div className="intro__card-copy">

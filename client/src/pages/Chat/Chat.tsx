@@ -14,7 +14,6 @@ export default function Chat() {
   const { isMobileMenuOpen, setIsMobileMenuOpen } =
     useOutletContext<MobileContext>();
 
-
   const [chats, setChats] = useState<ChatType[]>([]);
   const [activeChatId, setActiveChatId] = useState<string | null>(null);
   const [chatsError, setChatsError] = useState<string | null>(null);
@@ -121,9 +120,7 @@ export default function Chat() {
     }
   };
 
-  const handleKeyDown = (
-    e: React.KeyboardEvent<HTMLTextAreaElement>,
-  ) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       handleSend();
@@ -164,13 +161,9 @@ export default function Chat() {
           />
         )}
 
-        {isLoadingChats && (
-          <p className="chat__sidebar-message">Loading…</p>
-        )}
+        {isLoadingChats && <p className="chat__sidebar-message">Loading…</p>}
 
-        {chatsError && (
-          <p className="chat__sidebar-message">{chatsError}</p>
-        )}
+        {chatsError && <p className="chat__sidebar-message">{chatsError}</p>}
 
         <ul className="chat__list">
           {chats.map((chat) => (
@@ -230,12 +223,12 @@ export default function Chat() {
         {activeChatId && messagesError && (
           <div className="chat__error">
             <div className="chat__error-icon" aria-hidden="true">
-  <img
-    className="chat__error-icon-image"
-    src="/chat-error-icon.png"
-    alt=""
-  />
-</div>
+              <img
+                className="chat__error-icon-image"
+                src="/chat-error-icon.png"
+                alt="Chat error"
+              />
+            </div>
 
             <div className="chat__error-message">
               <div className="chat__error-text">
