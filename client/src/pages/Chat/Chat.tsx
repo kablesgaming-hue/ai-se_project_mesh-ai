@@ -28,6 +28,7 @@ export default function Chat() {
 
   const [input, setInput] = useState("");
   const [isSending, setIsSending] = useState(false);
+  const [sendingChatId, setSendingChatId] = useState<string | null>(null);
 
   useEffect(() => {
     const load = async () => {
@@ -94,9 +95,11 @@ export default function Chat() {
     const text = input.trim();
     if (!text || !activeChatId || isSending) return;
 
+    const chatId = activeChatId;
+    const optimisticId = `pending-${Date.now()}`;
     const userMessage: Message = {
-      _id: Date.now().toString(),
-      chatId: activeChatId,
+      _id: optimisticId,
+      chatId,
       role: "user",
       content: text,
       createdAt: new Date().toISOString(),
@@ -105,12 +108,18 @@ export default function Chat() {
     setMessages((prev) => [...prev, userMessage]);
     setInput("");
     setIsSending(true);
+    setSendingChatId(chatId);
 
     try {
-      const res = await sendMessage(activeChatId, text);
+      const res = await sendMessage(chatId, text);
 
       if (res.data) {
-        setMessages((prev) => [...prev, res.data!]);
+        // Replace the optimistic message with the actual saved user and assistant records.
+        setMessages((prev) =>
+          activeChatId === chatId
+            ? [...prev.filter((msg) => msg._id !== optimisticId), ...res.data!]
+            : prev,
+        );
       }
     } catch {
       const errorMessage: Message = {
@@ -124,6 +133,7 @@ export default function Chat() {
       setMessages((prev) => [...prev, errorMessage]);
     } finally {
       setIsSending(false);
+      setSendingChatId(null);
     }
   };
 
@@ -263,12 +273,17 @@ export default function Chat() {
                   }
                 >
                   {msg.role === "assistant" ? (
-                    <ReactMarkdown>{msg.content}</ReactMarkdown>
+                    <ReactMarkdown>{msg.content.replace(/<think>[\s\S]*?<\/think>/gi, "").trim()}</ReactMarkdown>
                   ) : (
                     msg.content
                   )}
                 </li>
               ))}
+              {isSending && sendingChatId === activeChatId && (
+                <li className="chat__message chat__message_assistant" role="status">
+                  Thinking…
+                </li>
+              )}
               <li ref={messagesEndRef} className="chat__messages-end" aria-hidden="true" />
             </ul>
 
