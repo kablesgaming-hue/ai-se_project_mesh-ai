@@ -219,3 +219,8 @@ export const sendMessage = async (
     error: null,
   };
 };
+
+// Temporary stub for Lesson 3; replace with the real API in the next lesson.
+export const getCurrentUser = async (): Promise<never> => {
+  throw new Error("Not implemented yet");
+};
