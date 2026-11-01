@@ -15,8 +15,7 @@ dist
 .idea
 .vscode
 
-# Secrets
 .env
 
-# Uploaded files
 uploads
+*.pdf

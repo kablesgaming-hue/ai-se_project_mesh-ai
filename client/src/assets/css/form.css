@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700&display=swap");
+
+.auth-page { min-height: 100vh; background: #f7f6fb; font-family: "Work Sans", Arial, sans-serif; color: #1c1c1c; }
+.auth-page__header { display: flex; align-items: center; height: 68px; padding: 0 clamp(20px, 5vw, 72px); background: #fff; }
+.auth-page__brand { display: inline-flex; align-items: center; gap: 8px; color: inherit; text-decoration: none; font-size: 20px; font-weight: 600; }
+.auth-page__brand img { width: 27px; height: 27px; object-fit: contain; }
+.auth-page__main { display: flex; justify-content: center; padding: clamp(32px, 7vh, 88px) 16px 60px; }
+.auth-form { width: min(100%, 440px); padding: 36px; border-radius: 16px; background: #fff; border: 1px solid #e7e3f0; box-shadow: 0 12px 32px rgba(33, 20, 67, .06); }
+.auth-form__title { font-size: clamp(25px, 4vw, 31px); font-weight: 700; line-height: 1.2; margin: 0; }
+.auth-form__subtitle { margin: 10px 0 25px; color: #686475; font-size: 14px; }
+.auth-form__tabs { display: flex; gap: 5px; padding: 5px; background: #f4f1f9; border-radius: 8px; margin-bottom: 27px; }
+.auth-form__tab { flex: 1; text-align: center; border-radius: 6px; padding: 10px; text-decoration: none; color: #514a61; font-size: 14px; font-weight: 600; }
+.auth-form__tab_active { background: #fff; color: #663ab6; box-shadow: 0 1px 5px rgba(31, 19, 52, .1); }
+.auth-form__fields { display: flex; flex-direction: column; gap: 12px; }
+.auth-form__field { display: flex; flex-direction: column; gap: 7px; }
+.auth-form__label { font-size: 14px; font-weight: 600; }
+.auth-form__input { width: 100%; min-height: 45px; border: 1px solid #d7d3df; border-radius: 8px; padding: 10px 12px; color: #1c1c1c; background: #fff; outline-offset: 2px; }
+.auth-form__input:focus { border-color: #7c51c7; outline: 2px solid #e9dcff; }
+.auth-form__input_invalid { border-color: #c43c57; }
+.auth-form__error { min-height: 16px; color: #ba2947; font-size: 12px; line-height: 1.25; }
+.auth-form__status { min-height: 16px; color: #ba2947; font-size: 13px; }
+.auth-form__submit { min-height: 46px; padding: 12px; border-radius: 8px; background: #7650bc; color: #fff; font-weight: 600; cursor: pointer; }
+.auth-form__submit:hover:not(:disabled) { background: #62409f; }
+.auth-form__submit:disabled { background: #c6c1d0; color: #f5f3f8; cursor: not-allowed; }
+@media (max-width: 520px) { .auth-form { padding: 24px 20px; } .auth-page__header { height: 60px; } }
