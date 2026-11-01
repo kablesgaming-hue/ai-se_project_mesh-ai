@@ -9,6 +9,7 @@ type AuthContextValue = {
   isLoading: boolean;
   login: (token: string, user: CurrentUser) => void;
   signOut: () => void;
+  logout: () => void;
   setCurrentUser: (user: CurrentUser | null) => void;
 };
 
@@ -61,6 +62,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       isLoading,
       login,
       signOut,
+      logout: signOut,
       setCurrentUser,
     }}>
       {children}

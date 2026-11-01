@@ -1,4 +1,6 @@
-import { NavLink } from "react-router-dom";
+import { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
 import "./Header.css";
 
 type Props = {
@@ -12,8 +14,19 @@ export default function Header({
   onMenuClose,
   isMobileMenuOpen,
 }: Props) {
+  const { isAuthenticated, currentUser, logout } = useAuth();
+  const [isAccountMenuOpen, setIsAccountMenuOpen] = useState(false);
+  const navigate = useNavigate();
+
   function getNavLinkClass({ isActive }: { isActive: boolean }) {
     return isActive ? "header__link header__link_active" : "header__link";
+  }
+
+  function handleLogout() {
+    logout();
+    setIsAccountMenuOpen(false);
+    onMenuClose();
+    navigate("/login", { replace: true });
   }
 
   return (
@@ -30,20 +43,49 @@ export default function Header({
         <img src="/favicon.png" alt="Mesh AI logo" />
       </div>
 
-      <nav
-        className={
-          isMobileMenuOpen ? "header__nav header__nav_mobile" : "header__nav"
-        }
-        onClick={onMenuClose}
-      >
-        <NavLink to="/knowledge" className={getNavLinkClass}>
-          Knowledge Base
-        </NavLink>
+      {isAuthenticated && (
+        <div className="header__actions">
+          <nav
+            className={
+              isMobileMenuOpen ? "header__nav header__nav_mobile" : "header__nav"
+            }
+            onClick={onMenuClose}
+          >
+            <NavLink to="/knowledge" className={getNavLinkClass}>
+              Knowledge Base
+            </NavLink>
+            <NavLink to="/chat" className={getNavLinkClass}>
+              Chat
+            </NavLink>
+          </nav>
 
-        <NavLink to="/chat" className={getNavLinkClass}>
-          Chat
-        </NavLink>
-      </nav>
+          <div className="header__account">
+            <button
+              type="button"
+              className="header__dropdown-btn"
+              aria-haspopup="menu"
+              aria-expanded={isAccountMenuOpen}
+              onClick={() => setIsAccountMenuOpen((open) => !open)}
+            >
+              {currentUser?.name}'s Account
+            </button>
+            {isAccountMenuOpen && (
+              <ul className="header__menu" role="menu">
+                <li role="none">
+                  <button
+                    type="button"
+                    role="menuitem"
+                    className="header__logout-btn"
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </button>
+                </li>
+              </ul>
+            )}
+          </div>
+        </div>
+      )}
     </header>
   );
 }
