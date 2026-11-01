@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import { getChats, createChat, getChat, sendMessage } from "../../utils/api";
@@ -22,6 +22,7 @@ export default function Chat() {
   const [newChatTitle, setNewChatTitle] = useState("");
 
   const [messages, setMessages] = useState<Message[]>([]);
+  const messagesEndRef = useRef<HTMLLIElement>(null);
   const [isLoadingMessages, setIsLoadingMessages] = useState(false);
   const [messagesError, setMessagesError] = useState("");
 
@@ -63,6 +64,12 @@ export default function Chat() {
 
     load();
   }, [activeChatId]);
+
+  useEffect(() => {
+    if (!isLoadingMessages && activeChatId) {
+      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages, isLoadingMessages, activeChatId]);
 
   const handleCreateChat = async () => {
     const title = newChatTitle.trim() || "New Chat";
@@ -262,6 +269,7 @@ export default function Chat() {
                   )}
                 </li>
               ))}
+              <li ref={messagesEndRef} className="chat__messages-end" aria-hidden="true" />
             </ul>
 
             <div className="chat__input-bar">

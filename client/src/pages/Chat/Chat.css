@@ -8,6 +8,18 @@
   color: #1c1c1c;
 }
 
+.chat::after {
+  content: "";
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 340px;
+  background: linear-gradient(to bottom, transparent 0%, #fff 35%);
+  pointer-events: none;
+  z-index: 1;
+}
+
 .chat__sidebar {
   position: absolute;
   left: 20px;
@@ -287,9 +299,14 @@
   flex-direction: column;
   gap: 20px;
   width: 555px;
-  margin: 135px auto 64px;
-  padding: 0;
+  margin: 135px auto 0;
+  padding: 0 0 180px;
   list-style: none;
+}
+
+.chat__messages-end {
+  height: 1px;
+  scroll-margin-bottom: 160px;
 }
 
 .chat__message {
@@ -359,11 +376,16 @@
 }
 
 .chat__input-bar {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  z-index: 100;
   box-sizing: border-box;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  width: 670px;
+  width: min(670px, calc(100vw - 32px));
   height: 100px;
   min-height: 100px;
   margin: 0 auto;
@@ -479,7 +501,7 @@
   .chat__input-bar {
     width: 100%;
     max-width: 670px;
-    margin: 24px auto 32px;
+    margin: 0;
   }
 
   .chat__error {
