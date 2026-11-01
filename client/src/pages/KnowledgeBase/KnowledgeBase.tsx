@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import UploadArea from "../../components/UploadArea/UploadArea";
 import deleteIcon from "../../assets/delete-icon.png";
-import { getDocuments } from "../../utils/api";
+import { getDocuments, uploadDocument } from "../../utils/api";
 import type { KnowledgeDoc } from "../../utils/api";
 import "./KnowledgeBase.css";
 
 export default function KnowledgeBase() {
   const [documents, setDocuments] = useState<KnowledgeDoc[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isUploading, setIsUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -25,16 +26,22 @@ export default function KnowledgeBase() {
     load();
   }, []);
 
-  const handleFileSelect = (file: File) => {
-    const newDoc: KnowledgeDoc = {
-      _id: Date.now().toString(),
-      title: file.name,
-      fileName: file.name,
-      userId: "local",
-      createdAt: new Date().toISOString(),
-    };
-
-    setDocuments((currentDocuments) => [newDoc, ...currentDocuments]);
+  const handleFileSelect = async (file: File) => {
+    if (isUploading) return;
+    setIsUploading(true);
+    setError(null);
+    try {
+      const res = await uploadDocument(file);
+      if (res.data) {
+        setDocuments((currentDocuments) => [res.data!, ...currentDocuments]);
+      } else {
+        setError(res.error?.message || "Document upload failed.");
+      }
+    } catch (error) {
+      setError(error instanceof Error ? error.message : "Document upload failed.");
+    } finally {
+      setIsUploading(false);
+    }
   };
 
   const handleDeleteDocument = (documentId: string) => {
@@ -54,7 +61,7 @@ export default function KnowledgeBase() {
               Upload documents (PDF)
             </p>
 
-            <UploadArea onFileSelect={handleFileSelect} />
+            <UploadArea onFileSelect={handleFileSelect} isUploading={isUploading} />
           </div>
 
           {isLoading && (
@@ -91,9 +98,6 @@ export default function KnowledgeBase() {
           )}
         </div>
 
-        <button className="knowledge-base__save-button" type="button">
-          Save
-        </button>
       </section>
     </div>
   );
