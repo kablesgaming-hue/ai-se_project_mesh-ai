@@ -1,4 +1,7 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { loginUser } from "../../utils/api";
+import { useAuth } from "../../contexts/AuthContext";
 import type { SubmitEvent } from "react";
 import AuthField from "../../components/AuthField/AuthField";
 import useFormWithValidation from "../../hooks/useFormWithValidation";
@@ -8,12 +11,27 @@ function getNavLinkClass({ isActive }: { isActive: boolean }) {
 }
 
 export default function Login() {
+  const navigate = useNavigate();
+  const { login } = useAuth();
+  const [status, setStatus] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { values, errors, isValid, handleChange, handleBlur } = useFormWithValidation({ email: "", password: "" });
 
-  function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
+  async function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
-    // Lesson 2 only: API integration is added in the next lesson.
-    console.log("Login form values:", values);
+    if (!isValid || isSubmitting) return;
+    setStatus("");
+    setIsSubmitting(true);
+    try {
+      const res = await loginUser(values.email, values.password);
+      if (!res.data) throw new Error(res.error?.message || "Login failed");
+      login(res.data.token, res.data.user);
+      navigate("/knowledge");
+    } catch (error) {
+      setStatus(error instanceof Error ? error.message : "Login failed");
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -32,8 +50,8 @@ export default function Login() {
           <form noValidate onSubmit={handleSubmit} className="auth-form__fields">
             <AuthField id="login-email" label="Email" name="email" type="email" value={values.email} error={errors.email} onChange={handleChange} onBlur={handleBlur} />
             <AuthField id="login-password" label="Password" name="password" type="password" value={values.password} error={errors.password} minLength={8} onChange={handleChange} onBlur={handleBlur} />
-            <p className="auth-form__status" role="status" aria-live="polite"></p>
-            <button className="auth-form__submit" type="submit" disabled={!isValid}>Log in</button>
+            <p className="auth-form__status" role="status" aria-live="polite">{status}</p>
+            <button className="auth-form__submit" type="submit" disabled={!isValid || isSubmitting}>Log in</button>
           </form>
         </section>
       </main>

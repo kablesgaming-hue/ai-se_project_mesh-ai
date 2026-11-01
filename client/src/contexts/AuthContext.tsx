@@ -7,7 +7,7 @@ type AuthContextValue = {
   currentUser: CurrentUser | null;
   isAuthenticated: boolean;
   isLoading: boolean;
-  signIn: (user: CurrentUser, token: string) => void;
+  login: (token: string, user: CurrentUser) => void;
   signOut: () => void;
   setCurrentUser: (user: CurrentUser | null) => void;
 };
@@ -20,7 +20,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     let active = true;
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("auth-token");
     if (!token) {
       setIsLoading(false);
       return () => { active = false; };
@@ -28,12 +28,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     // Next lesson replaces the API stub with authenticated session restoration.
     void getCurrentUser()
-      .then((user: CurrentUser) => {
-        if (active) setCurrentUser(user);
+      .then((res) => {
+        if (active && res.data) setCurrentUser(res.data);
       })
       .catch(() => {
         if (active) {
-          localStorage.removeItem("token");
+          localStorage.removeItem("auth-token");
           setCurrentUser(null);
         }
       })
@@ -44,13 +44,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return () => { active = false; };
   }, []);
 
-  const signIn = (user: CurrentUser, token: string) => {
-    localStorage.setItem("token", token);
+  const login = (token: string, user: CurrentUser) => {
+    localStorage.setItem("auth-token", token);
     setCurrentUser(user);
   };
 
   const signOut = () => {
-    localStorage.removeItem("token");
+    localStorage.removeItem("auth-token");
     setCurrentUser(null);
   };
 
@@ -59,7 +59,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       currentUser,
       isAuthenticated: currentUser !== null,
       isLoading,
-      signIn,
+      login,
       signOut,
       setCurrentUser,
     }}>
