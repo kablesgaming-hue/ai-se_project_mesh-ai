@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { loginUser } from "../../utils/api";
 import { useAuth } from "../../contexts/AuthContext";
@@ -12,6 +12,7 @@ function getNavLinkClass({ isActive }: { isActive: boolean }) {
 
 export default function Login() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { login } = useAuth();
   const [status, setStatus] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -26,7 +27,8 @@ export default function Login() {
       const res = await loginUser(values.email, values.password);
       if (!res.data) throw new Error(res.error?.message || "Login failed");
       login(res.data.token, res.data.user);
-      navigate("/knowledge");
+      const requestedPath = location.state?.from?.pathname;
+      navigate(requestedPath === "/chat" || requestedPath === "/knowledge" ? requestedPath : "/knowledge", { replace: true });
     } catch (error) {
       setStatus(error instanceof Error ? error.message : "Login failed");
     } finally {

@@ -460,6 +460,7 @@
   }
 
   .chat__sidebar_open {
+    top: 176.67px; /* Leave room for both page navigation links. */
     transform: translateX(0);
   }
 

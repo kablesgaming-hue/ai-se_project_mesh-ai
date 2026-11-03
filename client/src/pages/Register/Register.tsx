@@ -25,7 +25,8 @@ export default function Register() {
       if (!res.success) throw new Error(res.error?.message || "Registration failed");
       navigate("/login");
     } catch (error) {
-      setStatus(error instanceof Error ? error.message : "Registration failed");
+      const message = error instanceof Error ? error.message : "Registration failed";
+      setStatus(/email already exists|email already in use/i.test(message) ? "Email already in use" : message);
     } finally {
       setIsSubmitting(false);
     }

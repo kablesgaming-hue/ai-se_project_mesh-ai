@@ -116,7 +116,7 @@
     position: fixed;
     top: 60.67px;
     left: 0;
-    bottom: 0;
+    bottom: auto;
     width: 255px;
     max-width: calc(100vw - 32px);
     height: auto;
@@ -126,7 +126,7 @@
     align-items: flex-start;
     justify-content: flex-start;
     gap: 12px;
-    z-index: 101;
+    z-index: 103;
     display: none;
     background: #ffffff;
     border-right: 1px solid #e5e7eb;
